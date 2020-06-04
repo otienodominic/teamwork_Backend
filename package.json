@@ -11,6 +11,7 @@
     "lint:check": "eslint --print-config .eslintrc | eslint-config-prettier-check",
     "test": "jest",
     "test:watch": "jest --watchAll",
+    "test:coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
     "serve": "node dist/index.js"
   },
   "repository": {
