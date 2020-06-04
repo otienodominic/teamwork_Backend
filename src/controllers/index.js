@@ -1,5 +1,6 @@
-import createUser from './users';
+import users from './users';
 
+// const { createUser, signIn } = users;
 export default {
-  createUser,
+  users,
 };

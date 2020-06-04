@@ -5,4 +5,5 @@ dotenv.config();
 export default {
   DATABASE_URL: process.env.DATABASE_URL,
   port: process.env.PORT,
+  secret: process.env.SECRET,
 };

@@ -3,23 +3,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import config from './config';
 import router from './routes';
-// import routes from './routes';
-// import pool from './db';
-/**
- * id: 19,
-      firstname,
-      lastname,
-      username,
-      password,
-      email,
-      gender,
-      jobrole,
-      department,
-      address,
-      isadmin,
-      created_at
-    },
- */
 
 // call the database modules
 
