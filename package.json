@@ -10,6 +10,7 @@
     "lint:fix": "eslint src --fix --color",
     "lint:check": "eslint --print-config .eslintrc | eslint-config-prettier-check",
     "test": "jest",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "test:watch": "jest --watchAll",
     "serve": "node dist/index.js"
   },
@@ -47,6 +48,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "nyc": "^15.1.0",
     "pg": "^8.2.1"
   }
 }

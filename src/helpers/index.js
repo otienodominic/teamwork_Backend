@@ -5,13 +5,6 @@ import config from '../config';
 
 const { secret } = config;
 
-// create a database connection from environment variables
-// const pool = new Pool({
-//   connectionString: config.DATABASE_URL,
-// });
-
-// import { next } from 'sucrase/dist/parser/tokenizer';
-
 // helper to hash password
 const hashPassword = (password) => {
   return bcrypt.hash(password, 10);
