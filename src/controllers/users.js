@@ -101,7 +101,7 @@ async function signIn(req, res) {
         });
       } else {
         // const comparePass = comparePassword(password, user.fields.values())
-        const { id, hashedpassword, username, jobrole } = user.rows[0];
+        const { id, hashedpassword, username, isAdmin } = user.rows[0];
         const comparePass = await comparePassword(password, hashedpassword);
         if (comparePass === false) {
           res.status(400).json({
@@ -109,11 +109,17 @@ async function signIn(req, res) {
             Error: 'Incorrect Password!',
           });
         } else {
-          const userObj = { id, username, jobrole };
+          const role = isAdmin ? 'Admin' : 'Employee';
+          const userObj = { id, username, role };
           const tokenValue = generateToken(userObj);
           res.status(201).json({
             status: 'success',
-            data: { token: tokenValue, userId: id, userName: username },
+            data: {
+              token: tokenValue,
+              userId: id,
+              userName: username,
+              role,
+            },
           });
         }
       }
