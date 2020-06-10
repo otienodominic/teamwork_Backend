@@ -1,11 +1,8 @@
 import express from 'express';
-// import { Pool } from 'pg';
 import bodyParser from 'body-parser';
 import config from './config';
 import router from './routes';
-
-// call the database modules
-
+// https://www.youtube.com/watch?v=-E_SuY_8Ubs
 const app = express();
 app.use(bodyParser.json());
 

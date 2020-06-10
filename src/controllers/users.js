@@ -22,7 +22,6 @@ async function createUser(req, res) {
     jobrole,
     department,
     address,
-    isadmin,
   } = req.body;
   const hashedPassword = await hashPassword(password);
   // const userExists = await hashPassword.userExists(email);
@@ -50,7 +49,7 @@ async function createUser(req, res) {
       Error: 'All fields are required',
     });
   } else {
-    const insertUserQuery = `INSERT INTO users (firstName, lastName, username, hashedpassword, email, gender, jobrole, department, address, isadmin) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`;
+    const insertUserQuery = `INSERT INTO users (firstName, lastName, username, hashedpassword, email, gender, jobrole, department, address) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`;
     const values = [
       firstname,
       lastname,
@@ -61,7 +60,6 @@ async function createUser(req, res) {
       jobrole,
       department,
       address,
-      isadmin,
     ];
     await pool.query(insertUserQuery, values);
     try {
@@ -101,24 +99,25 @@ async function signIn(req, res) {
         });
       } else {
         // const comparePass = comparePassword(password, user.fields.values())
-        const { id, hashedpassword, username, isAdmin } = user.rows[0];
-        const comparePass = await comparePassword(password, hashedpassword);
+        const User = user.rows[0];
+        const comparePass = await comparePassword(
+          password,
+          User.hashedpassword,
+        );
         if (comparePass === false) {
           res.status(400).json({
             status: 'error',
             Error: 'Incorrect Password!',
           });
         } else {
-          const role = isAdmin ? 'Admin' : 'Employee';
-          const userObj = { id, username, role };
-          const tokenValue = generateToken(userObj);
+          // const role = isAdmin ? 'Admin' : 'Employee';
+          const tokenValue = generateToken(User);
           res.status(201).json({
             status: 'success',
             data: {
               token: tokenValue,
-              userId: id,
-              userName: username,
-              role,
+              user: User.id,
+              role: User.jobrole,
             },
           });
         }
@@ -128,6 +127,8 @@ async function signIn(req, res) {
     }
   }
 }
+
+// Get all users
 
 export default {
   createUser,
