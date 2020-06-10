@@ -23,8 +23,8 @@ const isValidEmail = (email) => {
   return email;
 };
 
-const generateToken = (userObj) => {
-  const token = jwt.sign(userObj, secret, { expiresIn: '7d' });
+const generateToken = (User) => {
+  const token = jwt.sign(User, secret, { expiresIn: '7d' });
   return token;
 };
 
