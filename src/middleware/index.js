@@ -37,4 +37,5 @@ function admin(req, res, next) {
   }
   next();
 }
+
 export default { verifyJWTToken, admin };
