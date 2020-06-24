@@ -20,6 +20,7 @@ const {
   getAllComments,
   deleteComment,
 } = controllers.comments;
+const { postGif, getGif, updateGif, deleteGif, getAllGifs } = controllers.gifs;
 
 // Users routes
 router.get('/login', signIn);
@@ -37,6 +38,13 @@ router.post('/article/:id/comment', verifyJWTToken, createComment);
 router.put('/article/:id/comment/:id', verifyJWTToken, editComment);
 router.get('/article/:id/comment', verifyJWTToken, getAllComments);
 router.delete('/article/:id/comment/:id', verifyJWTToken, deleteComment);
+
+// gif routes
+router.post('/gif', verifyJWTToken, postGif);
+router.get('/gif/:cloudinary_id', verifyJWTToken, getGif);
+router.put('/gif/:cloudinary_id', verifyJWTToken, updateGif);
+router.delete('/gif/:cloudinary_id', verifyJWTToken, deleteGif);
+router.get('/gifs', verifyJWTToken, getAllGifs);
 
 router.get('/dashboard', verifyJWTToken, admin, (req, res) => {
   res.json({ message: 'Welcome to the Home Page' });
