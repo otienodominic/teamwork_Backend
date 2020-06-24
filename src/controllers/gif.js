@@ -17,9 +17,10 @@ cloudinary.v2.config({
 
 async function postGif(req, res) {
   const { title, image } = req.body;
+  const userId = req.user.id;
   const upload = await cloudinary.v2.uploader.upload(image);
-  const insertGifQuery = `INSERT INTO gifs (title, cloudinary_id, gif_url) VALUES ($1, $2, $3)`;
-  const values = [title, upload.public_id, upload.secure_url];
+  const insertGifQuery = `INSERT INTO gifs (title, cloudinary_id, gif_url, user_id) VALUES ($1, $2, $3, $4)`;
+  const values = [title, upload.public_id, upload.secure_url, userId];
   await pool.query(insertGifQuery, values);
   try {
     res.status(201).json({
