@@ -1,3 +1,4 @@
+// "coverage": "nyc report --reporter=text-lcov | coveralls",
 import controllers from '../src/controllers';
 
 const { createUser, signIn } = controllers.users;

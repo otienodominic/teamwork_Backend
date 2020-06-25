@@ -10,9 +10,9 @@
     "lint:fix": "eslint src --fix --color",
     "lint:check": "eslint --print-config .eslintrc | eslint-config-prettier-check",
     "test": "jest",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "test:watch": "jest --watchAll",
-    "serve": "node dist/index.js"
+    "serve": "node dist/index.js",
+    "coverage": "npm run pretest && jest --coverage && cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
@@ -49,6 +49,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-jwt": "^5.3.3",
+    "gemfile": "^1.1.0",
     "jsonwebtoken": "^8.5.1",
     "jwt-login": "0.0.3",
     "multer": "^1.4.2",
