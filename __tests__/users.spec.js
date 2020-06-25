@@ -14,6 +14,4 @@ test('should insert new user', () => {
     department: 'Finance',
     address: 'Migori',
   };
-  
-  
 });
