@@ -1,18 +1,37 @@
 // "coverage": "nyc report --reporter=text-lcov | coveralls",
-import controllers from '../src/controllers';
+import supertest from 'supertest';
+// import { response } from 'express';
+import app from '../src/app';
 
-const { createUser, signIn } = controllers.users;
+const request = supertest(app);
 
-test('should insert new user', () => {
-  const user = {
-    firstname: 'James',
-    lastname: 'Onyango',
-    username: 'onyi',
-    password: '$2b$10',
-    email: 'cjenyi@gmail.com',
-    gender: 'Male',
-    jobrole: 'Accountant',
-    department: 'Finance',
-    address: 'Migori',
-  };
+// const demoUser = {
+//   firstname: 'James',
+//   lastname: 'Onyango',
+//   username: 'onyi',
+//   password: '$2b$10',
+//   email: 'cjenyi@gmail.com',
+//   gender: 'Male',
+//   jobrole: 'Accountant',
+//   department: 'Finance',
+//   address: 'Migori',
+// };
+test('should log in a valid user', async () => {
+  await request
+    .get('/api/v1/login')
+    .send({
+      email: 'otieno@gmail.com',
+      password: '1234',
+    })
+    .expect(201);
+});
+
+test('should not log in invalid user', async () => {
+  await request
+    .get('/api/v1/login')
+    .send({
+      email: 'nyash@com',
+      password: '1235',
+    })
+    .expect(400);
 });
